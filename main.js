@@ -14,13 +14,13 @@ function fill_pancakes(num_pancakes) {
 }
 
 function find_largest_pancake(pancakes, n) {
-    let mi = 0;
+    let largestIndex = 0;
     for (let i = 0; i < n; i++) {
-        if (pancakes[i] > pancakes[mi]) {
-            mi = i;
+        if (pancakes[i] > pancakes[largestIndex]) {
+            largestIndex = i;
         }
     }
-    return mi;
+    return largestIndex;
 }
 
 function flip_pancakes(pancakes, index) {
@@ -32,16 +32,16 @@ function pancakeSort(arr) {
     let n = arr.length;
     for (let curr_size = n; curr_size > 1; --curr_size) {
         // encuentra el index del pancake más grande en la porción no ordenada
-        let mi = find_largest_pancake(arr, curr_size);
+        let largestIndex = find_largest_pancake(arr, curr_size);
 
         // si la parte más grande no está en la parte superior, selecciona una subarray y la volteas
-        if (mi !== curr_size - 1) {
+        if (largestIndex !== curr_size - 1) {
             // selecciona una subarray al azar de la porción no ordenada
             let rand_start = Math.floor(Math.random() * curr_size);
             let rand_end = Math.floor(Math.random() * (curr_size - rand_start)) + rand_start;
 
             // voltear la subarray para traer el pancake más grande a la parte superior
-            arr = flip_pancakes(arr, mi);
+            arr = flip_pancakes(arr, largestIndex);
             arr = flip_pancakes(arr, rand_end);
             arr = flip_pancakes(arr, rand_start - 1);
         }
